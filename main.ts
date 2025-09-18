@@ -1,4 +1,5 @@
-input.onButtonPressed(Button.A, function () {
+input.onButtonPressed(Button.A, function on_button_pressed_a() {
+    
     music.play(music.tonePlayable(262, music.beat(BeatFraction.Eighth)), music.PlaybackMode.UntilDone)
     index += -1
     if (mode == 0) {
@@ -37,19 +38,24 @@ input.onButtonPressed(Button.A, function () {
                 . . . . #
                 `)
         }
+        
     } else if (mode == 2) {
         basic.showNumber(index)
     }
+    
 })
-input.onGesture(Gesture.TiltLeft, function () {
+input.onGesture(Gesture.TiltLeft, function on_gesture_tilt_left() {
     editChannelSettings()
 })
-function editChannelSettings () {
+function editChannelSettings() {
+    
     mode = 2
     index = channel
     basic.showNumber(channel)
 }
-function SendMessage () {
+
+function SendMessage() {
+    
     basic.showLeds(`
         . . . . .
         . . . . #
@@ -68,7 +74,9 @@ function SendMessage () {
     message_to_send = ""
     basic.showString(Alphabet.charAt(index))
 }
-input.onButtonPressed(Button.AB, function () {
+
+input.onButtonPressed(Button.AB, function on_button_pressed_ab() {
+    
     basic.clearScreen()
     mode = 1
     index = 0
@@ -105,8 +113,9 @@ input.onButtonPressed(Button.AB, function () {
             . . . . #
             `)
     }
+    
 })
-radio.onReceivedString(function (receivedString) {
+radio.onReceivedString(function on_received_string(receivedString: string) {
     basic.clearScreen()
     music.play(music.stringPlayable("C5 B A G F E D C ", 1500), music.PlaybackMode.UntilDone)
     music.play(music.stringPlayable("C5 B A G F E D C ", 1500), music.PlaybackMode.UntilDone)
@@ -115,7 +124,8 @@ radio.onReceivedString(function (receivedString) {
     basic.pause(1000)
     basic.showString(Alphabet.charAt(index))
 })
-input.onButtonPressed(Button.B, function () {
+input.onButtonPressed(Button.B, function on_button_pressed_b() {
+    
     music.play(music.tonePlayable(262, music.beat(BeatFraction.Eighth)), music.PlaybackMode.UntilDone)
     index += 1
     if (mode == 0) {
@@ -154,11 +164,14 @@ input.onButtonPressed(Button.B, function () {
                 . . . . #
                 `)
         }
+        
     } else if (mode == 2) {
         basic.showNumber(index)
     }
+    
 })
-input.onGesture(Gesture.Shake, function () {
+input.onGesture(Gesture.Shake, function on_gesture_shake() {
+    
     music.play(music.tonePlayable(262, music.beat(BeatFraction.Eighth)), music.PlaybackMode.UntilDone)
     if (mode == 0) {
         message_to_send = "" + message_to_send + Alphabet.charAt(index)
@@ -194,6 +207,7 @@ input.onGesture(Gesture.Shake, function () {
                 . . . . #
                 `)
         }
+        
     } else if (mode == 2) {
         radio.setGroup(index)
         channel = index
@@ -203,6 +217,7 @@ input.onGesture(Gesture.Shake, function () {
         index = 0
         basic.showString(Alphabet.charAt(index))
     }
+    
 })
 let mode = 0
 let index = 0
@@ -217,7 +232,8 @@ Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ-"
 index = 0
 music.setVolume(255)
 basic.showString(Alphabet.charAt(index))
-basic.forever(function () {
+basic.forever(function on_forever() {
+    
     if (mode == 0) {
         if (index == -1) {
             index = 26
@@ -226,6 +242,7 @@ basic.forever(function () {
             index = 0
             basic.showString(Alphabet.charAt(index))
         }
+        
     } else if (mode == 1) {
         if (index == -1) {
             index = 3
@@ -246,5 +263,7 @@ basic.forever(function () {
                 # # # # #
                 `)
         }
+        
     }
+    
 })
